@@ -1,0 +1,14 @@
+{% if memes %}
+    <ul>
+        {% for meme in memes %}
+        <li>
+            <div>{{ meme.name }}</div>
+            <div>
+            <img src="{{ meme.url }}" style="width : 100px; height:100px;"/>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
