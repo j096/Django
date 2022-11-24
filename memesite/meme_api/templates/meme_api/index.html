@@ -1,14 +1,48 @@
-{% if memes %}
-    <ul>
-        {% for meme in memes %}
-        <li>
-            <div>{{ meme.name }}</div>
-            <div>
-            <img src="{{ meme.url }}" style="width : 100px; height:100px;"/>
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <link rel="stylesheet" href="{%static 'css/memeapi.css'%}"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    </head>
+    <script>
+        $(document).ready(function(){
+            if("{{searchVal}}"!="")
+                $("#searchVal").val("{{searchVal}}");
+
+            $("#search").val("Search");
+        });
+    </script>
+    <body>
+        <div class="container-fluid">
+        <form action="{% url 'memes:search'  %}" method="post">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <input class="form-control" id="searchVal" name="searchVal"  aria-describedby="basic-addon2"/>
+            
+                <div class="input-group-append">
+                    <input class="btn btn-outline-secondary" type="button" id="search" val="Search"/>
+                </div>
             </div>
-        </li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
+
+        </form>
+        {% if memes %}
+        <table class="table table-bordered">
+            {% for meme in memes %}
+            <tr>
+                <th style="width : 100px; height:auto;"><font size="6">{{ meme.name }}</font></th>
+            </tr>
+            <tr>
+                <td>
+                    <img src="{{ meme.url }}" style="width : 300px; height:300px;"/>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+            <p>No memes are available.</p>
+        {% endif %}
+    </div>
+    </body> 
+</html>
