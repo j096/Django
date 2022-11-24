@@ -13,6 +13,11 @@
             $("#search").val("Search");
         });
     </script>
+    <style>
+        ul li { display:inline-block; margin:10px; }
+        div.memeName img { width:200px; height:200px; }
+        div.memeImg { padding:10px 0; text-align:center; }
+    </style>
     <body>
         <div class="container-fluid">
         <form action="{% url 'memes:search'  %}" method="post">
@@ -27,16 +32,16 @@
 
         </form>
         {% if memes %}
-        <table class="table table-active">
-            <tr>
-                {% for meme in memes %}    
-                <th style="width : 100px; height:auto;"><font size="6">{{ meme.name }}</font></th>
-                </tr>
-            <tr>
-                <td>
+        <ul>
+            {% for meme in memes %}    
+            <li>
+                <div id="memeName">
+                    <font size="6">{{ meme.name }}</font>
+                </div>
+                <div id="memeImg">
                     <img src="{{ meme.url }}" style="width : 300px; height:300px;"/>
-                </td>
-            </tr>
+                </div>
+            </li>
             {%endfor%}
         </table>
         {% else %}
