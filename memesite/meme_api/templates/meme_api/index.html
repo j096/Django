@@ -2,9 +2,8 @@
 {% load static %}
 <html lang="en">
     <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-        <link rel="stylesheet" href="{%static 'css/memeapi.css'%}"/>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <script src="{%static 'js/jquery/3.6.1/jquery.min.js' %}"></script>
+        <link rel="stylesheet" href="{%static 'css/bootstrap.css'%}"/>
     </head>
     <script>
         $(document).ready(function(){
@@ -19,26 +18,26 @@
         <form action="{% url 'memes:search'  %}" method="post">
             {% csrf_token %}
             <div class="input-group mb-3">
-                <input class="form-control" id="searchVal" name="searchVal"  aria-describedby="basic-addon2"/>
+                <input class="form-control" id="searchVal" name="searchVal"  placeholder="Search..." aria-describedby="basic-addon2"/>
             
                 <div class="input-group-append">
-                    <input class="btn btn-outline-secondary" type="button" id="search" val="Search"/>
+                    <input class="btn btn-outline-secondary" type="Submit" id="search" val="Search"/>
                 </div>
             </div>
 
         </form>
         {% if memes %}
-        <table class="table table-bordered">
-            {% for meme in memes %}
+        <table class="table table-active">
             <tr>
+                {% for meme in memes %}    
                 <th style="width : 100px; height:auto;"><font size="6">{{ meme.name }}</font></th>
-            </tr>
+                </tr>
             <tr>
                 <td>
                     <img src="{{ meme.url }}" style="width : 300px; height:300px;"/>
                 </td>
             </tr>
-            {% endfor %}
+            {%endfor%}
         </table>
         {% else %}
             <p>No memes are available.</p>
